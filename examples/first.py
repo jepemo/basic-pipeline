@@ -6,6 +6,6 @@ from bpipe import pipe
 
 
 
-pipe(range(0,10)) \
+pipe(range(0,5)) \
 	.next(lambda x: print(x)) \
 	.start()
