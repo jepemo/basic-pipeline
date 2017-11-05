@@ -7,5 +7,7 @@ from bpipe import pipe
 
 
 pipe(range(0,5)) \
-	.next(lambda x: print(x)) \
+	.peek() \
+	.next(lambda x: x+1) \
+	.peek() \
 	.run()
