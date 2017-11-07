@@ -14,12 +14,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from bpipe.utils import is_iterable
 
+
 class Pipe:
-    def __init__(self, generator):
+    def __init__(self, generator, debug=False):
         self.generator = generator
         self.steps = []
         self.error_callback = None
         self.abort_on_error = False
+        self.iterator = None
+        self.debug = debug
 
     def peek(self):
         """Observe streaming objects (For development)"""
@@ -73,9 +76,19 @@ class Pipe:
                       '-->', result)
         return result
 
-    def go(self, debug=False):
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if not self.iterator:
+            self.iterator = iter(self.generator)
+
+        x = next(self.iterator)
+        return self._execute_steps(x, self.steps, debug=self.debug)
+
+    def go(self):
         for x in self.generator:
-            self._execute_steps(x, self.steps, debug=debug)
+            self._execute_steps(x, self.steps, debug=self.debug)
 
     def list(self):
         result = []

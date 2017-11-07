@@ -40,5 +40,5 @@ def get_path(name):
     return 'file://%s' % p.join(PARENT_DIR, 'data', name)
 
 
-def pipe(generator):
-    return Pipe(generator)
+def pipe(*args, **kwargs):
+    return Pipe(*args, **kwargs)
