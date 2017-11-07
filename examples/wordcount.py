@@ -13,10 +13,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import sys; sys.path.append("../")
+import re
 from bpipe import pipe
 
-pipe(range(0, 5)) \
-    .peek() \
-    .map(lambda x: x + 1) \
-    .peek() \
+TEXT = """Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elit
+ipsum, malesuada lacinia justo id, luctus dignissim nibh. Proin feugiat dapibus
+metus non auctor. Sed sodales velit sed pellentesque lacinia. Morbi non elit et
+risus interdum interdum. Sed varius turpis a enim volutpat consequat. Donec ut
+risus efficitur, maximus elit in, tempor tellus. Proin vitae tellus quis eros
+rutrum facilisis."""
+
+pipe([TEXT]) \
+    .map(lambda t: re.sub("[^0-9a-zA-Z]+", " ", t)) \
+    .map(lambda t: t.split()) \
+    .flatten() \
+    .map(lambda t: t.lower()) \
     .go()

@@ -13,6 +13,10 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+from setuptools import setup, find_packages
+from codecs import open
+from os import path
+
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
@@ -39,6 +43,9 @@ setup(
 
     # Choose your license
     license='GPL-v3',
+
+    setup_requires=['pytest-runner', ],
+    tests_require=['pytest', ],
 
     # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[

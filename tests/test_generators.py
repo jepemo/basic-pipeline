@@ -4,7 +4,7 @@ from bpipe import pipe
 
 class TestGenerators(unittest.TestCase):
     def test_range(self):
-        result = pipe(range(1, 5)).get()
+        result = pipe(range(1, 5)).list()
         self.assertEqual(result, [1, 2, 3, 4])
 
 

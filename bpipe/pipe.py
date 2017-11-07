@@ -12,18 +12,17 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+from bpipe.utils import is_iterable
 
 class Pipe:
     def __init__(self, generator):
-        """
-        """
         self.generator = generator
         self.steps = []
         self.error_callback = None
         self.abort_on_error = False
 
     def peek(self):
+        """Observe streaming objects (For development)"""
         def _peek(x):
             print(x)
             return x
@@ -31,22 +30,42 @@ class Pipe:
         self.steps.append(_peek)
         return self
 
-    def next(self, step):
+    def map(self, step):
+        """Add transformation to the pipeline"""
         self.steps.append(step)
         return self
 
     def error(self, error_callback, abort_on_error=False):
+        """Handle pipeline errors"""
         self.error_callback = error_callback
         self.abort_on_error = abort_on_error
         return self
 
-    def run(self):
+    def flatten(self):
+        """Unbox boxed elements"""
+        def _flatten(x):
+            if isinstance(x, list):
+                for e in x:
+                    yield e
+            else:
+                return x
+
+        self.steps.append(_flatten)
+        return self
+
+    def flat_map(self, f):
+        return self
+
+    def go(self):
         for x in self.generator:
             result = x
             for step in self.steps:
-                result = step(result)
+                if is_iterable(step):
+                    pass
+                else:
+                    result = step(result)
 
-    def get(self):
+    def list(self):
         result = []
 
         def _get_result(x):
@@ -54,5 +73,5 @@ class Pipe:
             return x
 
         self.steps.append(_get_result)
-        self.run()
+        self.go()
         return result
