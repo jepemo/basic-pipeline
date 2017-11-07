@@ -1,5 +1,5 @@
 # basic-pipeline
-Minimal &amp; Simple Pipeline for Python
+basic-pipeline (or *bpipe*) is a minimal &amp; Simple Pipeline Engine for Python
 
 ## Getting Started
 Just install it with the pip client:
@@ -14,7 +14,7 @@ from bpipe import pipe
 
 pipe(range(0,5))
 	.map(lambda x: print(x))
-	.run()
+	.go()
 
 # Result:
 # 0

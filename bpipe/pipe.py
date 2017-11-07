@@ -56,14 +56,26 @@ class Pipe:
     def flat_map(self, f):
         return self
 
-    def go(self):
+    def _execute_steps(self, x, current_steps, debug=False, debug_pad=""):
+        result = x
+        for idx, step in enumerate(current_steps):
+            ini = x
+            if is_iterable(step):
+                for e in step(result):
+                    result = self._execute_steps(e, current_steps[idx + 1:],
+                                                 debug=debug,
+                                                 debug_pad=debug_pad + " ")
+            else:
+                result = step(x)
+
+            if debug:
+                print("{0}[{1}]".format(debug_pad, idx), ini, '-->', step,
+                      '-->', result)
+        return result
+
+    def go(self, debug=False):
         for x in self.generator:
-            result = x
-            for step in self.steps:
-                if is_iterable(step):
-                    pass
-                else:
-                    result = step(result)
+            self._execute_steps(x, self.steps, debug=debug)
 
     def list(self):
         result = []

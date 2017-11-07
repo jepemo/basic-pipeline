@@ -22,10 +22,12 @@ metus non auctor. Sed sodales velit sed pellentesque lacinia. Morbi non elit et
 risus interdum interdum. Sed varius turpis a enim volutpat consequat. Donec ut
 risus efficitur, maximus elit in, tempor tellus. Proin vitae tellus quis eros
 rutrum facilisis."""
+TEXT1 = """Hola como, estas hola"""
 
-pipe([TEXT]) \
+pipe([TEXT1]) \
     .map(lambda t: re.sub("[^0-9a-zA-Z]+", " ", t)) \
     .map(lambda t: t.split()) \
     .flatten() \
     .map(lambda t: t.lower()) \
-    .go()
+    .map(lambda t: "[{0}]".format(t)) \
+    .go(debug=True)
