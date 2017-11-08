@@ -76,6 +76,9 @@ class Pipe:
                       '-->', result)
         return result
 
+    def __or__(self, dst):
+        print(dst)
+
     def __iter__(self):
         return self
 
