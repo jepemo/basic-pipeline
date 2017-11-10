@@ -12,7 +12,21 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-from bpipe import pipe
+from bpipe.pipe import Pipe
+
+
+def echo(str_input):
+    p = Pipe([str_input])
+    l = list(p)
+    for e in l:
+        print(e)
+    return p
+
+
+def map_to(func):
+    p = Pipe(None)
+    p.steps.append(func)
+    return p
 
 
 def cat(filename):

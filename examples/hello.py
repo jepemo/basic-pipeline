@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # bpipe - Minimal & Simple Pipeline for Python
 #
@@ -13,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import sys; sys.path.append("../")
-from bpipe import pipe
+from bpipe import *
 
-pipe(None) | "Hello world"
+#echo("Hello World")
+
+echo("Hello World") | map_to(lambda x: x.upper())

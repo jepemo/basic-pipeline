@@ -21,6 +21,7 @@ bpipe
 from os import path as p
 from builtins import *  # noqa # pylint: disable=unused-import
 from bpipe.pipe import Pipe
+from bpipe.sources import cat, echo, map_to
 
 __version__ = '1.0.0'
 
@@ -42,3 +43,6 @@ def get_path(name):
 
 def pipe(*args, **kwargs):
     return Pipe(*args, **kwargs)
+
+
+__all__ = ['cat', 'echo', 'map_to', 'pipe']

@@ -77,7 +77,10 @@ class Pipe:
         return result
 
     def __or__(self, dst):
-        print(dst)
+        #print("HEY:", dst.generator)
+        p = list(self)
+        dst.generator = p
+
 
     def __iter__(self):
         return self
@@ -89,7 +92,7 @@ class Pipe:
         x = next(self.iterator)
         return self._execute_steps(x, self.steps, debug=self.debug)
 
-    def go(self):
+    def _go(self):
         for x in self.generator:
             self._execute_steps(x, self.steps, debug=self.debug)
 
@@ -101,5 +104,5 @@ class Pipe:
             return x
 
         self.steps.append(_get_result)
-        self.go()
+        self._go()
         return result
