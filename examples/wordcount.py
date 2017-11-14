@@ -25,10 +25,10 @@ risus efficitur, maximus elit in, tempor tellus. Proin vitae tellus quis eros
 rutrum facilisis."""
 TEXT1 = """Hola como, estas hola"""
 
-p = pipe([TEXT1]) \
+p = pipe([TEXT1], debug=True) \
     .map(lambda t: re.sub("[^0-9a-zA-Z]+", " ", t)) \
     .map(lambda t: t.split()) \
-    #.flatten() \
+    .flatten() \
     #.map(lambda t: t.lower()) \
     #.map(lambda t: "[{0}]".format(t)) \
 
