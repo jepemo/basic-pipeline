@@ -16,6 +16,5 @@
 import sys; sys.path.append("../")
 from bpipe import *
 
-#echo("Hello World")
-
-echo("Hello World") | map_to(lambda x: x.upper())
+for r in echo("Hello World") | map_to(lambda x: x.upper()):
+    print(r)

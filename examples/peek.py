@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # bpipe - Minimal & Simple Pipeline for Python
 #
@@ -15,8 +16,7 @@
 import sys; sys.path.append("../")
 from bpipe import pipe
 
-pipe(range(0, 5)) \
+list(pipe(range(0, 5)) \
     .peek() \
     .map(lambda x: x + 1) \
-    .peek() \
-    .go()
+    .peek())

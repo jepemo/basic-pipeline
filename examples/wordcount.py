@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # bpipe - Minimal & Simple Pipeline for Python
 #
@@ -24,10 +25,12 @@ risus efficitur, maximus elit in, tempor tellus. Proin vitae tellus quis eros
 rutrum facilisis."""
 TEXT1 = """Hola como, estas hola"""
 
-pipe([TEXT1]) \
+p = pipe([TEXT1]) \
     .map(lambda t: re.sub("[^0-9a-zA-Z]+", " ", t)) \
     .map(lambda t: t.split()) \
-    .flatten() \
-    .map(lambda t: t.lower()) \
-    .map(lambda t: "[{0}]".format(t)) \
-    .go(debug=True)
+    #.flatten() \
+    #.map(lambda t: t.lower()) \
+    #.map(lambda t: "[{0}]".format(t)) \
+
+for e in p:
+    print(e)

@@ -16,19 +16,16 @@ from bpipe.pipe import Pipe
 
 
 def echo(str_input):
-    p = Pipe([str_input])
-    l = list(p)
-    for e in l:
-        print(e)
+    p = Pipe([str_input], final=True, name="echo")
     return p
 
 
 def map_to(func):
-    p = Pipe(None)
+    p = Pipe(None, name="map_to")
     p.steps.append(func)
     return p
 
 
 def cat(filename):
     reader = open(filename, 'r')
-    return pipe(reader.readlines())
+    return Pipe(reader.read().splitlines(), name="cat")

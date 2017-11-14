@@ -16,13 +16,15 @@ from bpipe.utils import is_iterable
 
 
 class Pipe:
-    def __init__(self, generator, debug=False):
+    def __init__(self, generator, debug=False, final=False, name=None):
         self.generator = generator
         self.steps = []
         self.error_callback = None
         self.abort_on_error = False
         self.iterator = None
         self.debug = debug
+        self.final = final
+        self.name = name
 
     def peek(self):
         """Observe streaming objects (For development)"""
@@ -77,10 +79,14 @@ class Pipe:
         return result
 
     def __or__(self, dst):
-        #print("HEY:", dst.generator)
-        p = list(self)
-        dst.generator = p
-
+        # print("Name=", self.name)
+        self.steps.extend(dst.steps)
+        #if self.final:
+        #    for e in self:
+        #        print(e)
+        #    return self
+        #else:
+        return self
 
     def __iter__(self):
         return self
