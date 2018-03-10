@@ -66,10 +66,13 @@ class Pipe:
         for idx, step in enumerate(current_steps):
             ini = x
             if is_iterable(step):
+                print ("Si es iterable")
+                print(list(step(result)))
                 for e in step(result):
                     result = self._execute_steps(e, current_steps[idx + 1:],
                                                  debug=debug,
                                                  debug_pad=debug_pad + " ")
+                    return result
             else:
                 result = step(x)
 
