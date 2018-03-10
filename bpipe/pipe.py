@@ -25,6 +25,7 @@ class Pipe:
         self.debug = debug
         self.final = final
         self.name = name
+        self.results = []
 
     def peek(self):
         """Observe streaming objects (For development)"""
@@ -66,20 +67,19 @@ class Pipe:
         for idx, step in enumerate(current_steps):
             ini = x
             if is_iterable(step):
-                print ("Si es iterable")
-                print(list(step(result)))
                 for e in step(result):
                     result = self._execute_steps(e, current_steps[idx + 1:],
                                                  debug=debug,
                                                  debug_pad=debug_pad + " ")
-                    return result
+                    self.results.append(result)
             else:
-                result = step(x)
+                self.results.append(step(x))
+                # result = step(x)
 
             if debug:
                 print("{0}[{1}]".format(debug_pad, idx), ini, '-->', step,
                       '-->', result)
-        return result
+        #return result
 
     def __or__(self, dst):
         # print("Name=", self.name)
@@ -98,8 +98,15 @@ class Pipe:
         if not self.iterator:
             self.iterator = iter(self.generator)
 
-        x = next(self.iterator)
-        return self._execute_steps(x, self.steps, debug=self.debug)
+        if len(self.results) > 0:
+            return self.results.pop(0)
+        else:
+            x = next(self.iterator)
+            self._execute_steps(x, self.steps, debug=self.debug)
+            if len(self.results) > 0:
+                return self.results.pop(0)
+            
+        #return self._execute_steps(x, self.steps, debug=self.debug)
 
     def _go(self):
         for x in self.generator:

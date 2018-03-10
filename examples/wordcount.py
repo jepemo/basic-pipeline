@@ -26,7 +26,7 @@ rutrum facilisis."""
 TEXT1 = """Hola como, estas hola"""
 TEXT2 = """Hola como, eres hola"""
 
-p = pipe([TEXT1, TEXT2], debug=True) \
+p = pipe([TEXT1], debug=False) \
     .map(lambda t: re.sub("[^0-9a-zA-Z]+", " ", t)) \
     .map(lambda t: t.lower()) \
     .map(lambda t: t.split()) \
