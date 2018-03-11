@@ -26,13 +26,13 @@ rutrum facilisis."""
 TEXT1 = """Hola como, estas hola"""
 TEXT2 = """Hola como, eres hola"""
 
-p = pipe([TEXT1], debug=False) \
+p = pipe([TEXT1], debug=True) \
     .map(lambda t: re.sub("[^0-9a-zA-Z]+", " ", t)) \
     .map(lambda t: t.lower()) \
-    .map(lambda t: t.split()) \
-    .flatten() \
+    #.map(lambda t: t.split()) \
+    #.flatten() \
     #.map(lambda t: t.lower()) \
     #.map(lambda t: "[{0}]".format(t)) \
 
 for e in p:
-    print(e)
+    print("OUT:", e)
