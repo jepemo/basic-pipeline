@@ -16,16 +16,12 @@
 import re
 from bpipe import pipe
 
-TEXT = """Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam elit
-ipsum, malesuada lacinia justo id, luctus dignissim nibh. Proin feugiat dapibus
-metus non auctor. Sed sodales velit sed pellentesque lacinia. Morbi non elit et
-risus interdum interdum. Sed varius turpis a enim volutpat consequat. Donec ut
-risus efficitur, maximus elit in, tempor tellus. Proin vitae tellus quis eros
-rutrum facilisis."""
-TEXT1 = """Hola como, estas hola"""
-TEXT2 = """Hola como, eres hola"""
+TEXT = """In a village of La Mancha, the name of which I have no desire to call
+to mind, there lived not long since one of those gentlemen that keep a lance in
+the lance-rack, an old buckler, a lean hack, and a greyhound for coursing.
+"""
 
-p = pipe([TEXT1], debug=True) \
+p = pipe([TEXT], debug=True) \
     .map(lambda t: re.sub("[^0-9a-zA-Z]+", " ", t)) \
     .map(lambda t: t.lower()) \
     #.map(lambda t: t.split()) \
