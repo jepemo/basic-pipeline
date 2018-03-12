@@ -10,26 +10,22 @@ pip install bpipe
 
 Simple example
 ```python
-from bpipe import pipe
+from bpipe import *
 
-pipe(range(0,5))
-	.map(lambda x: print(x))
-	.go()
+for r in echo("Hello World") | map_to(lambda x: x.upper()):
+    print(r)
 
-# Result:
-# 0
-# 1
-# 2
-# 3
-# 4
+# HELLO WORLD
 ```
 
 ## Development
 
 * Executing examples:
 ```python
-cd examples
-python first.py
+python3 -m venv venv
+source venv/bin/activate
+pip install -e .
+python examples/first.py
 # etc.
 ```
 
