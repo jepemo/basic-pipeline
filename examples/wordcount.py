@@ -16,18 +16,17 @@
 import re
 from bpipe import pipe
 
-TEXT = """In a village of La Mancha, the name of which I have no desire to call
-to mind, there lived not long since one of those gentlemen that keep a lance in
-the lance-rack, an old buckler, a lean hack, and a greyhound for coursing.
-"""
+S1 = "I scream,"
+S2 = "You scream,"
+S3 = "They scream,"
+S4 = "We all scream for an ice cream!"
 
-p = pipe([TEXT], debug=True) \
+p = pipe([S1, S2, S3, S4], debug=False) \
     .map(lambda t: re.sub("[^0-9a-zA-Z]+", " ", t)) \
     .map(lambda t: t.lower()) \
-    #.map(lambda t: t.split()) \
-    #.flatten() \
-    #.map(lambda t: t.lower()) \
-    #.map(lambda t: "[{0}]".format(t)) \
+    .map(lambda t: t.split()) \
+    .flatten() \
+    .group_by()
 
-for e in p:
-    print("OUT:", e)
+for w, c in p:
+    print(w, c)

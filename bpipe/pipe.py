@@ -14,7 +14,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from bpipe.utils import is_iterable
 
-
 class Pipe:
     def __init__(self, generator, debug=False, final=False, name=None):
         self.generator = generator
@@ -59,26 +58,43 @@ class Pipe:
         self.steps.append(_flatten)
         return self
 
+    def group_by(self):
+        results = list(self)
+        c = {}
+        for r in results:
+            if not r in c:
+                c[r] = 0
+            c[r] += 1
+        return [(k, v) for k, v in c.items()]
+
+
     def flat_map(self, f):
         return self
 
     def _execute_steps(self, x, current_steps, debug=False, debug_pad=""):
         result = x
+        append_to_result = True
         for idx, step in enumerate(current_steps):
             ini = x
             if is_iterable(step):
+                append_to_result = False
                 for e in step(result):
-                    result = self._execute_steps(e, current_steps[idx + 1:],
+                    self._execute_steps(e, current_steps[idx + 1:],
                                                  debug=debug,
                                                  debug_pad=debug_pad + " ")
-                    self.results.append(result)
+                    #print("-->", result)
+                    #self.results.append(result)
             else:
-                self.results.append(step(x))
+                result = step(result)
+                #self.results.append(result)
                 # result = step(x)
 
             if debug:
                 print("{0}[{1}]".format(debug_pad, idx), ini, '-->', step,
                       '-->', result)
+
+        if append_to_result:
+            self.results.append(result)
         #return result
 
     def __or__(self, dst):
@@ -105,7 +121,7 @@ class Pipe:
             self._execute_steps(x, self.steps, debug=self.debug)
             if len(self.results) > 0:
                 return self.results.pop(0)
-            
+
         #return self._execute_steps(x, self.steps, debug=self.debug)
 
     def _go(self):

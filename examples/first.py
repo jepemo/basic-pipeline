@@ -15,4 +15,4 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 from bpipe import pipe
 
-print(list(pipe(range(0, 5), debug=True).map(lambda x: x + 1)))
+print(list(pipe(range(0, 5), debug=True).map(lambda x: x ** 2)))
