@@ -1,5 +1,5 @@
 # basic-pipeline
-basic-pipeline (or *bpipe*) is a minimal &amp; Simple Pipeline Engine for Python
+basic-pipeline (or *bpipe*) is a minimal &amp; simple pipeline engine for Python
 
 ## Getting Started
 Just install it with the pip client:
