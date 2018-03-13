@@ -13,15 +13,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-bpipe
+bpipe : Minimal & Simple Pipeline for Python
 ~~~~
- Simple example...
 
+Example:
+```
+from bpipe import *
+
+for r in echo("Hello World") | map_to(lambda x: x.upper()):
+    print(r)
+
+# HELLO WORLD
+```
 """
+
 from os import path as p
 from builtins import *  # noqa # pylint: disable=unused-import
 from bpipe.pipe import Pipe
-from bpipe.sources import cat, echo, map_to
+from bpipe.sources import cat, echo, map_to, flatten, flat_map
 
 __version__ = '1.0.0'
 
@@ -44,5 +53,4 @@ def get_path(name):
 def pipe(*args, **kwargs):
     return Pipe(*args, **kwargs)
 
-
-__all__ = ['cat', 'echo', 'map_to', 'pipe']
+__all__ = ['cat', 'echo', 'map_to', 'pipe', 'flatten', 'flat_map']

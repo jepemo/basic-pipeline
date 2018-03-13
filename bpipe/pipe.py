@@ -58,6 +58,12 @@ class Pipe:
         self.steps.append(_flatten)
         return self
 
+    def flat_map(self, step):
+        """Unbox the elements and apply the transformation"""
+        self.flatten()
+        self.map(step)
+        return self
+
     def group_by(self):
         results = list(self)
         c = {}
@@ -67,9 +73,6 @@ class Pipe:
             c[r] += 1
         return [(k, v) for k, v in c.items()]
 
-
-    def flat_map(self, f):
-        return self
 
     def _execute_steps(self, x, current_steps, debug=False, debug_pad=""):
         result = x
@@ -85,6 +88,7 @@ class Pipe:
                     #print("-->", result)
                     #self.results.append(result)
             else:
+                print(result)
                 result = step(result)
                 #self.results.append(result)
                 # result = step(x)

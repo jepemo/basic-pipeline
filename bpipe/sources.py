@@ -15,6 +15,11 @@
 from bpipe.pipe import Pipe
 
 
+def cat(filename):
+    reader = open(filename, 'r')
+    return Pipe(reader.read().splitlines(), name="cat")
+
+
 def echo(str_input):
     p = Pipe([str_input], final=True, name="echo")
     return p
@@ -26,6 +31,12 @@ def map_to(func):
     return p
 
 
-def cat(filename):
-    reader = open(filename, 'r')
-    return Pipe(reader.read().splitlines(), name="cat")
+def flatten():
+    p = Pipe(None, name="flatten")
+    p.flatten()
+    return p
+
+def flat_map(func):
+    p = Pipe(None, name="flatmap")
+    p.flat_map(func)
+    return p
