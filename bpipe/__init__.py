@@ -30,7 +30,7 @@ for r in echo("Hello World") | map_to(lambda x: x.upper()):
 from os import path as p
 from builtins import *  # noqa # pylint: disable=unused-import
 from bpipe.pipe import Pipe
-from bpipe.sources import cat, echo, map_to, flatten, flat_map
+from bpipe.sources import cat, echo, map_to, flatten, flat_map, curl
 
 __version__ = '1.0.0'
 
@@ -53,4 +53,4 @@ def get_path(name):
 def pipe(*args, **kwargs):
     return Pipe(*args, **kwargs)
 
-__all__ = ['cat', 'echo', 'map_to', 'pipe', 'flatten', 'flat_map']
+__all__ = ['cat', 'echo', 'map_to', 'pipe', 'flatten', 'flat_map', 'curl']

@@ -78,37 +78,27 @@ class Pipe:
         result = x
         append_to_result = True
         for idx, step in enumerate(current_steps):
-            ini = x
+            if debug:
+                print("{0}[{1}]".format(debug_pad, idx), result, '-->', step)
+
             if is_iterable(step):
                 append_to_result = False
                 for e in step(result):
                     self._execute_steps(e, current_steps[idx + 1:],
-                                                 debug=debug,
-                                                 debug_pad=debug_pad + " ")
-                    #print("-->", result)
-                    #self.results.append(result)
+                                        debug=debug,
+                                        debug_pad=debug_pad + " ")
+                break
             else:
-                print(result)
                 result = step(result)
-                #self.results.append(result)
-                # result = step(x)
 
             if debug:
-                print("{0}[{1}]".format(debug_pad, idx), ini, '-->', step,
-                      '-->', result)
+                print("{0} ==>".format(debug_pad), result)
 
         if append_to_result:
             self.results.append(result)
-        #return result
 
     def __or__(self, dst):
-        # print("Name=", self.name)
         self.steps.extend(dst.steps)
-        #if self.final:
-        #    for e in self:
-        #        print(e)
-        #    return self
-        #else:
         return self
 
     def __iter__(self):
@@ -125,8 +115,6 @@ class Pipe:
             self._execute_steps(x, self.steps, debug=self.debug)
             if len(self.results) > 0:
                 return self.results.pop(0)
-
-        #return self._execute_steps(x, self.steps, debug=self.debug)
 
     def _go(self):
         for x in self.generator:

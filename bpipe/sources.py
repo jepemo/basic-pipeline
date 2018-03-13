@@ -24,6 +24,12 @@ def echo(str_input):
     p = Pipe([str_input], final=True, name="echo")
     return p
 
+def curl(url):
+    import urllib.request
+    with urllib.request.urlopen(url) as response:
+        lines = response.readlines()
+        p = Pipe(lines, name="curl")
+        return p
 
 def map_to(func):
     p = Pipe(None, name="map_to")

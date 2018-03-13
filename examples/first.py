@@ -13,16 +13,6 @@
 # GNU General Public License for more details.
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-from bpipe import Pipe, flat_map, pipe
+from bpipe import pipe
 
-#print(list(pipe(range(0, 5), debug=True).map(lambda x: x ** 2)))
-
-param = [[1, 2,], [3, 4]]
-result = [2, 3, 4, 5]
-trans = lambda x: x+1
-p1 = Pipe(param, debug=True).flat_map(trans)
-#p2 = Pipe(param) | flat_map(trans)
-r1 = list(p1)
-#r2 = list(p2)
-
-print(r1)
+print(list(pipe(range(0, 5), debug=True).map(lambda x: x ** 2)))
