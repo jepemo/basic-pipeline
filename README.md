@@ -1,6 +1,15 @@
 # basic-pipeline
 basic-pipeline (or *bpipe*) is a minimal &amp; simple pipeline engine for Python
 
+- [Getting Started](#getting-started)
+  - [Installation](#installation)
+  - [Tests](#tests)
+- [Reference](#reference)
+  - [Sources](#sources)
+  - [Transformations](#transformations)
+
+## Getting Started
+
 ## Examples
 ```python
 from bpipe import *
@@ -10,16 +19,6 @@ for r in echo("Hello World") | map_to(lambda x: x.upper()):
 
 # HELLO WORLD
 ```
-
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
-  - [Examples](#examples)
-  - [Tests](#tests)
-- [Reference](#reference)
-  - [Sources](#sources)
-  - [Transformations](#transformations)
-
-## Getting Started
 
 ### Installation
 
@@ -37,13 +36,6 @@ cd basic-pipeline
 python3 -m venv venv
 source venv/bin/activate
 pip install -e .
-```
-
-### Examples
-```python
-python examples/helloworld.py
-python examples/wordcount.py
-# etc.
 ```
 
 ### Tests
