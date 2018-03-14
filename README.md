@@ -2,6 +2,7 @@
 basic-pipeline (or *bpipe*) is a minimal &amp; simple pipeline engine for Python
 
 - [Getting Started](#getting-started)
+  - [Examples](#examples)
   - [Installation](#installation)
   - [Tests](#tests)
 - [Tutorial](#tutorial)
