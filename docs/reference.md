@@ -1,5 +1,14 @@
 ## Reference
 
+- [Sources](#sources)
+  - [echo](#echo)
+  - [cat](#cat)
+  - [curl](#curl)
+- [Transformations](#transformations)
+  - [map_to](#map_to)
+  - [flatten](#flatten)
+  - [flat_map](#flat_map)
+
 ### Sources
 #### echo
 ```
