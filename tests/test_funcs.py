@@ -1,5 +1,5 @@
 import unittest
-from bpipe import Pipe, map_to, flat_map, flatten
+from bpipe import Pipe, map_to, flat_map, flatten, group_by
 
 class TestGenerators(unittest.TestCase):
     def test_map(self):
@@ -20,7 +20,7 @@ class TestGenerators(unittest.TestCase):
         self.assertEqual(r2, result)
         self.assertEqual(r1, r2)
 
-    def test_flatmap(self):
+    def test_flat_map(self):
         param = [[1, 2], [3, 4]]
         result = [2, 3, 4, 5]
         trans = lambda x: x+1
@@ -31,6 +31,17 @@ class TestGenerators(unittest.TestCase):
         self.assertEqual(r1, result)
         self.assertEqual(r2, result)
         self.assertEqual(r1, r2)
+
+    def test_group_by(self):
+        param = ['a', 'b', 'b', 'c']
+        result = [('a', 1), ('b', 2), ('c', 1)]
+        p1 = Pipe(param).group_by()
+        p2 = Pipe(param) | group_by()
+        r1 = list(p1)
+        r2 = list(p2)
+        self.assertListEqual(r1, result)
+        self.assertListEqual(r2, result)
+        self.assertListEqual(r1, r2)
 
 if __name__ == '__main__':
     unittest.main()

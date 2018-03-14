@@ -8,6 +8,7 @@
   - [map_to](#map_to)
   - [flatten](#flatten)
   - [flat_map](#flat_map)
+  - [group_by](#group_by)
 
 ### Sources
 #### echo
@@ -24,7 +25,7 @@ Initializes the pipe with the content of a file
 
 #### curl
 ```
-curl(url) | <transformations> 
+curl(url) | <transformations>
 ```
 Initializes the pipe with the contents of a url.
 
@@ -45,3 +46,9 @@ Unbox the element of the stream if it is boxed.
 <source> | <transformations> | flat_map(function) | ...
 ```
 First unbox the element and then applies the function.
+
+#### group_by
+```
+<source> | <transformations> | group_by() | ...
+```
+Group the results
