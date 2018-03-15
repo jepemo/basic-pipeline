@@ -105,6 +105,9 @@ class Pipe:
         return self
 
     def __next__(self):
+        if not self.generator:
+            raise StopIteration
+            
         if not self.iterator:
             self.iterator = iter(self.generator)
 

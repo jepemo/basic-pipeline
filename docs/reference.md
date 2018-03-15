@@ -46,9 +46,3 @@ Unbox the element of the stream if it is boxed.
 <source> | <transformations> | flat_map(function) | ...
 ```
 First unbox the element and then applies the function.
-
-#### group_by
-```
-<source> | <transformations> | group_by() | ...
-```
-Group the results

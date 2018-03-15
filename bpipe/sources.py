@@ -47,7 +47,7 @@ def flat_map(func):
     p.flat_map(func)
     return p
 
-def group_by():
-    p = Pipe(None, name="groupby")
-    p.group_by()
-    return p
+#def group_by():
+#    p = Pipe(None, name="groupby")
+#    p.group_by()
+#    return p
