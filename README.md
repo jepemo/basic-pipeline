@@ -1,6 +1,8 @@
 # basic-pipeline
 basic-pipeline (or *bpipe*) is a minimal &amp; simple pipeline engine for Python
 
+[![Build Status](https://travis-ci.org/jepemo/basic-pipeline.svg?branch=master)](https://travis-ci.org/jepemo/basic-pipeline)
+
 - [Getting Started](#getting-started)
   - [Examples](#examples)
   - [Installation](#installation)
